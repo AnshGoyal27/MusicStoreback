@@ -78,7 +78,7 @@ router.post('/load',(req,res)=>{
 
 router.post('/payment',async (req,res)=>{
     const obj=req.body;
-    const succurl = 'https://music-storeback.vercel.app/paid/' + obj.loggedin.id + '/' + obj.time;
+    const succurl = 'https://music-storeback-bp21.vercel.app/paid/' + obj.loggedin.id + '/' + obj.time;
     const session = await stripe.checkout.sessions.create({
         line_items: [
           {
