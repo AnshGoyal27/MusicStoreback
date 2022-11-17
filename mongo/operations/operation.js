@@ -22,7 +22,6 @@ module.exports={
                     console.log(err);
                 }
                 else{
-                    console.log("Subscribeedddddd       ",doc);
                 }
             }).clone();
         }
@@ -32,7 +31,6 @@ module.exports={
                     console.log(err);
                 }
                 else{
-                    console.log("Subscribeedddddd       ",doc);
                 }
             }).clone();
         }
@@ -41,7 +39,6 @@ module.exports={
     async addplaylist(obj){
         await userModel.findOne({'User-ID':obj.userid}).exec()
         .then((doc)=>{
-            console.log(doc);
             if(!doc){
                 const createUser=this.addUser(obj.userid);
                 if(createUser._id){
@@ -81,7 +78,6 @@ module.exports={
                     return err
                 }
                 else{
-                    console.log(doc);   
                     return '300'
                 }
             })
@@ -108,7 +104,6 @@ module.exports={
                     return err
                 }
                 else{
-                    console.log(doc);
                     return '300'   
                 }
             })
@@ -118,7 +113,6 @@ module.exports={
         let playlist=[]
         await userModel.findOne({'User-ID':userid}).exec()
         .then((doc)=>{
-            console.log('Docccccccccccc',doc);
             playlist=doc.Playlist;
         })
         .catch((err)=>{
