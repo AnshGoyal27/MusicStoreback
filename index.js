@@ -7,7 +7,7 @@ const useRouter=require('./routes/routes');
 
 
 app.use(cors({
-    origin:'http://localhost:3000'
+    origin:'https://musicstorebm.netlify.app/'
 }))
 
 
