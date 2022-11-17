@@ -11,8 +11,6 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT);
 
 router.post('/save',(request,response)=>{
     const obj=request.body;
-    console.log(obj);
-    console.log(obj.playlist);
     async function savedata(){
         await userOperations.addplaylist(obj);
         response.status(200).json({message:'hello'})
@@ -23,7 +21,6 @@ router.post('/save',(request,response)=>{
 
 router.post('/delete',(request,response)=>{
     const obj=request.body;
-    console.log(obj);
     async function deletedata(){
         await userOperations.deleteplaylist(obj);
         response.status(200).json({message:'hello'})
@@ -53,7 +50,6 @@ router.post('/loginverified',(req,res)=>{
         const userid = payload['sub'];
         // If request specified a G Suite domain:
         // const domain = payload['hd']
-        console.log('ticketttttt',ticket);
         if(ticket){
             res.send({data:operations.RetrieveData(obj.credential),token:true});
         }
@@ -69,7 +65,6 @@ router.post('/load',(req,res)=>{
     async function dataget(){
         const data=await userOperations.getData(obj.userid);
         if(data){
-            console.log('Dagtaaaaaaaaaaaaaaaaaaaa',data)
             res.send({playlists:data});
         }
         else{
@@ -83,7 +78,7 @@ router.post('/load',(req,res)=>{
 
 router.post('/payment',async (req,res)=>{
     const obj=req.body;
-    const succurl = 'http://localhost:1234/paid/' + obj.loggedin.id + '/' + obj.time;
+    const succurl = 'https://music-storeback.vercel.app/paid/' + obj.loggedin.id + '/' + obj.time;
     const session = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -99,7 +94,7 @@ router.post('/payment',async (req,res)=>{
         ],
         mode: obj.type,
         success_url: succurl,
-        cancel_url: `http://localhost:3000`,
+        cancel_url: `https://musicstorebm.netlify.app`,
     });
     res.header("Access-Control-Allow-Origin","http://localhost:3000");
     res.header('Access-Control-Allow-Credentials', 'true')
@@ -111,7 +106,7 @@ router.post('/payment',async (req,res)=>{
 router.get('/paid/:userid/:time',(req,res)=>{
     async function dopayment(){
         await userOperations.PaymentDone(req.params['userid'],req.params['time']);
-        res.redirect('http://localhost:3000');
+        res.redirect('https://musicstorebm.netlify.app');
     }
     dopayment();
 })
