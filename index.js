@@ -2,11 +2,14 @@ const express=require('express');
 const app=express();
 require("dotenv").config()
 var cors = require('cors')
+app.use(cors({
+    origin:'https://musicstorebm.netlify.app'
+}))
+
 const useRouter=require('./routes/routes');
 
 
 
-app.use(cors())
 
 
 app.use(express.json());
