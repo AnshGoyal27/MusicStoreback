@@ -6,9 +6,7 @@ const useRouter=require('./routes/routes');
 
 
 
-app.use(cors({
-    origin:'https://musicstorebm.netlify.app/'
-}))
+app.use(cors())
 
 
 app.use(express.json());
